@@ -1,5 +1,3 @@
-Dưới đây là nội dung các bài tập thực hành Git đã được biên tập lại dưới dạng Markdown với ngôn ngữ tường thuật khách quan, tập trung vào kết quả và mã nguồn theo yêu cầu:
-
 # PART 2: EXERCISES SUMMARY
 
 **Context:** The project maintains two primary branches: `master` (for testing features) and `production` (for live code).
