@@ -1,12 +1,16 @@
-# PHẦN 2: BÀI TẬP (EXERCISES)
+Dưới đây là nội dung các bài tập thực hành Git đã được biên tập lại dưới dạng Markdown với ngôn ngữ tường thuật khách quan, tập trung vào kết quả và mã nguồn theo yêu cầu:
 
-**Bối cảnh:** Nhánh `master` (chứa các tính năng đang test) và nhánh `production` (chứa code chạy thực tế).
+# PART 2: EXERCISES SUMMARY
 
-### Câu 1: Khi tạo tính năng mới, nên dựa trên nhánh nào và tại sao?
+**Context:** The project maintains two primary branches: `master` (for testing features) and `production` (for live code).
 
-**Câu trả lời:** Nên dựa trên nhánh `master` (nếu quy trình của  quy định master là nơi chứa mã nguồn mới nhất đã qua kiểm thử cơ bản) hoặc `production` (nếu muốn đảm bảo tính năng mới bắt đầu từ trạng thái ổn định nhất của sản phẩm). Trong hầu hết các quy trình hiện đại, ta tạo nhánh từ nhánh chính (main/master).
+### 1. Branch Selection for New Features
 
-**Lệnh Git:**
+**Requirement:** Determine the appropriate base branch when initiating a new feature.
+
+**Result:** New features are typically based on the **`master` branch** if it serves as the repository for the latest tested code. Alternatively, the **`production` branch** can be used to ensure the feature starts from the most stable project state. Standard workflows generally favor creating feature branches from the main development line.
+
+**Git Commands:**
 ```bash
 git checkout master
 git pull origin master
@@ -15,11 +19,13 @@ git checkout -b feature/new-feature-name
 
 ---
 
-### Câu 2: Nếu nhánh tính năng có lỗi và chưa được gộp vào production,  sẽ làm gì?
+### 2. Bug Resolution in Unmerged Feature Branches
 
-**Câu trả lời:**  nên thực hiện sửa lỗi ngay trên nhánh tính năng đó. Nếu lỗi nằm ở commit cuối cùng và  chưa đẩy code lên server,  có thể dùng `--amend` để sửa đổi. Nếu đã đẩy lên hoặc lỗi nằm ở các commit cũ hơn, hãy tạo một commit sửa lỗi mới trên chính nhánh đó.
+**Requirement:** Define the procedure for resolving bugs within a feature branch that has not yet been integrated into production.
 
-**Lệnh Git:**
+**Result:** Bug fixes are performed directly on the affected feature branch. If the bug is located in the most recent commit and has not been pushed to the remote repository, the `--amend` command is utilized. For bugs in older commits or if the branch has already been pushed, a new fix commit is required.
+
+**Git Commands:**
 ```bash
 git checkout master
 git pull origin master
@@ -27,27 +33,27 @@ git checkout feature/login
 git add .
 git commit -m "fix: resolve bug in feature description"
 
-# Hoặc nếu sửa lỗi cho commit vừa mới tạo xong (chưa push):
+# Case: Modifying the most recent local commit
 git commit --amend --no-edit
 ```
 
 ---
 
-### Câu 3: Cách loại bỏ một tính năng (gồm nhiều commit) đã lỡ merge vào production?
+### 3. Removal of Accidentally Merged Features from Production
 
-**Tình huống:** Đã merge `feature/delete-user` (IDs: `0492978`, `fc9348c`, `k101100`) vào `production`, sau đó có thêm commit `a1fsas8` đè lên trên.
+**Requirement:** Address a scenario where a feature (e.g., `feature/delete-user` with IDs `0492978`, `fc9348c`, `k101100`) was merged into production, followed by a subsequent commit (`a1fsas8`).
 
-**Câu trả lời:** Vì đã có commit mới (`a1fsas8`) nằm trên đỉnh,  **không nên dùng reset** vì sẽ làm mất commit `a1fsas8`. Cách an toàn nhất là dùng **`git revert`** để tạo các commit đảo ngược các thay đổi đã merge nhằm giữ an toàn cho lịch sử dự án.
+**Result:** To preserve the integrity of the newer commit (`a1fsas8`), a `reset` command is avoided. The established solution is to use **`git revert`** to create new commits that mathematically negate the changes of the accidental merge, thereby maintaining a clean and accurate history for the production branch.
 
-**Lệnh Git:** 
- có thể revert từng commit theo thứ tự ngược lại, hoặc revert chính commit merge (nếu  biết ID của commit merge đó).
+**Git Commands:**
+The reversal can be executed for each individual commit ID in reverse order or by targeting the specific merge commit ID.
 
 ```bash
-# Revert từng commit của tính năng lỗi
+# Reverting individual commits from the faulty feature
 git revert k101100
 git revert fc9348c
 git revert 0492978
 
-# Hoặc nếu là revert một Merge Commit (giả sử ID merge là m12345):
+# Case: Reverting a specific Merge Commit (example ID: m12345)
 # git revert -m 1 m12345
 ```
