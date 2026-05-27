@@ -25,9 +25,12 @@ git checkout -b feature/new-feature-name
 
 **Git Commands:**
 ```bash
-git checkout master
-git pull origin master
-git checkout feature/login 
+git checkout feature/login
+git fetch origin
+git merge origin/master
+```
+Fix the bug
+```bash
 git add .
 git commit -m "fix: resolve bug in feature description"
 
@@ -54,4 +57,6 @@ git revert 0492978
 
 # Case: Reverting a specific Merge Commit (example ID: m12345)
 # git revert -m 1 m12345
+
+git push origin production
 ```
