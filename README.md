@@ -4,7 +4,7 @@
 
 ### Câu 1: Khi tạo tính năng mới, nên dựa trên nhánh nào và tại sao?
 
-**Câu trả lời:** Nên dựa trên nhánh `master` (nếu quy trình của bạn quy định master là nơi chứa mã nguồn mới nhất đã qua kiểm thử cơ bản) hoặc `production` (nếu bạn muốn đảm bảo tính năng mới bắt đầu từ trạng thái ổn định nhất của sản phẩm). Trong hầu hết các quy trình hiện đại, ta tạo nhánh từ nhánh chính (main/master).
+**Câu trả lời:** Nên dựa trên nhánh `master` (nếu quy trình của  quy định master là nơi chứa mã nguồn mới nhất đã qua kiểm thử cơ bản) hoặc `production` (nếu muốn đảm bảo tính năng mới bắt đầu từ trạng thái ổn định nhất của sản phẩm). Trong hầu hết các quy trình hiện đại, ta tạo nhánh từ nhánh chính (main/master).
 
 **Lệnh Git:**
 ```bash
