@@ -15,9 +15,9 @@ git checkout -b feature/new-feature-name
 
 ---
 
-### Câu 2: Nếu nhánh tính năng có lỗi và chưa được gộp vào production, bạn sẽ làm gì?
+### Câu 2: Nếu nhánh tính năng có lỗi và chưa được gộp vào production,  sẽ làm gì?
 
-**Câu trả lời:** Bạn nên thực hiện sửa lỗi ngay trên nhánh tính năng đó. Nếu lỗi nằm ở commit cuối cùng và bạn chưa đẩy code lên server, bạn có thể dùng `--amend` để sửa đổi. Nếu đã đẩy lên hoặc lỗi nằm ở các commit cũ hơn, hãy tạo một commit sửa lỗi mới trên chính nhánh đó.
+**Câu trả lời:**  nên thực hiện sửa lỗi ngay trên nhánh tính năng đó. Nếu lỗi nằm ở commit cuối cùng và  chưa đẩy code lên server,  có thể dùng `--amend` để sửa đổi. Nếu đã đẩy lên hoặc lỗi nằm ở các commit cũ hơn, hãy tạo một commit sửa lỗi mới trên chính nhánh đó.
 
 **Lệnh Git:**
 ```bash
@@ -37,10 +37,10 @@ git commit --amend --no-edit
 
 **Tình huống:** Đã merge `feature/delete-user` (IDs: `0492978`, `fc9348c`, `k101100`) vào `production`, sau đó có thêm commit `a1fsas8` đè lên trên.
 
-**Câu trả lời:** Vì đã có commit mới (`a1fsas8`) nằm trên đỉnh, bạn **không nên dùng reset** vì sẽ làm mất commit `a1fsas8`. Cách an toàn nhất là dùng **`git revert`** để tạo các commit đảo ngược các thay đổi đã merge nhằm giữ an toàn cho lịch sử dự án.
+**Câu trả lời:** Vì đã có commit mới (`a1fsas8`) nằm trên đỉnh,  **không nên dùng reset** vì sẽ làm mất commit `a1fsas8`. Cách an toàn nhất là dùng **`git revert`** để tạo các commit đảo ngược các thay đổi đã merge nhằm giữ an toàn cho lịch sử dự án.
 
 **Lệnh Git:** 
-Bạn có thể revert từng commit theo thứ tự ngược lại, hoặc revert chính commit merge (nếu bạn biết ID của commit merge đó).
+ có thể revert từng commit theo thứ tự ngược lại, hoặc revert chính commit merge (nếu  biết ID của commit merge đó).
 
 ```bash
 # Revert từng commit của tính năng lỗi
