@@ -23,7 +23,7 @@ git checkout -b feature/new-feature-name
 
 **Requirement:** Define the procedure for resolving bugs within a feature branch that has not yet been integrated into production.
 
-**Result:** Before attempting to fix the bug, it is crucial to synchronize the local feature branch with the latest updates to isolate the issue. First, we pull any new changes from the remote feature branch (if collaborating). Second, we fetch and merge the latest code from the production branch. This ensures the bug is still reproducible on the most current codebase and prevents resolving a bug that might have been caused by outdated base code.
+**Result:** Before attempting to fix the bug, it is crucial to synchronize the local feature branch with the latest updates to isolate the issue. First, pull any new changes from the remote feature branch. Second, fetch and merge the latest code from the production branch. This ensures the bug is still reproducible on the most current codebase and prevents resolving a bug that might have been caused by outdated base code.
 
 **Git Commands:**
 ```bash
@@ -49,7 +49,7 @@ git commit --amend --no-edit
 
 **Requirement:** Address a scenario where a feature (e.g., `feature/delete-user` with IDs `0492978`, `fc9348c`, `k101100`) was merged into production, followed by a subsequent commit (`a1fsas8`).
 
-**Result:** To preserve the integrity of the newer commit (`a1fsas8`), a `reset` command is avoided. The established solution is to use **`git revert`** to create new commits that mathematically negate the changes of the accidental merge, thereby maintaining a clean and accurate history for the production branch.
+**Result:** To preserve the integrity of the newer commit (`a1fsas8`), a `reset` command is avoided. The established solution is to use **`git revert`** to create new commits that negate the changes of the accidental merge.
 
 
 ```bash
