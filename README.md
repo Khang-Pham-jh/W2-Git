@@ -6,12 +6,14 @@
 
 **Requirement:** Determine the appropriate base branch when initiating a new feature.
 
-**Result:** New features are typically based on the **`master` branch** if it serves as the repository for the latest tested code. Alternatively, the **`production` branch** can be used to ensure the feature starts from the most stable project state. Standard workflows generally favor creating feature branches from the main development line.
+**Result:**: New features should be based on the production branch instead of the master branch.
+
+Reason: The production branch contains the current stable version of the application running in the live environment. In contrast, the master branch is used for testing and may include unfinished or unstable features. Creating new feature branches from production helps avoid inheriting untested changes and provides a more stable starting point for development.
 
 **Git Commands:**
 ```bash
-git checkout master
-git pull origin master
+git checkout production
+git pull origin production
 git checkout -b feature/new-feature-name
 ```
 
@@ -21,13 +23,16 @@ git checkout -b feature/new-feature-name
 
 **Requirement:** Define the procedure for resolving bugs within a feature branch that has not yet been integrated into production.
 
-**Result:** Bug fixes are performed directly on the affected feature branch. If the bug is located in the most recent commit and has not been pushed to the remote repository, the `--amend` command is utilized. For bugs in older commits or if the branch has already been pushed, a new fix commit is required.
+**Result:** Before attempting to fix the bug, it is crucial to synchronize the local feature branch with the latest updates to isolate the issue. First, we pull any new changes from the remote feature branch (if collaborating). Second, we fetch and merge the latest code from the production branch. This ensures the bug is still reproducible on the most current codebase and prevents resolving a bug that might have been caused by outdated base code.
 
 **Git Commands:**
 ```bash
-git checkout feature/login
+git checkout feature/your-feature-branch
+git pull origin feature/your-feature-branch
+
+# Fetch and merge the latest production code to update the base
 git fetch origin
-git merge origin/master
+git merge origin/production
 ```
 Fix the bug
 ```bash
@@ -46,14 +51,11 @@ git commit --amend --no-edit
 
 **Result:** To preserve the integrity of the newer commit (`a1fsas8`), a `reset` command is avoided. The established solution is to use **`git revert`** to create new commits that mathematically negate the changes of the accidental merge, thereby maintaining a clean and accurate history for the production branch.
 
-**Git Commands:**
-The reversal can be executed for each individual commit ID in reverse order or by targeting the specific merge commit ID.
 
 ```bash
 # Reverting individual commits from the faulty feature
-git revert k101100
-git revert fc9348c
-git revert 0492978
+git revert -n k101100 fc9348c 0492978
+git commit -m "revert: remove accidental merge of feature/delete-user"
 
 # Case: Reverting a specific Merge Commit (example ID: m12345)
 # git revert -m 1 m12345
